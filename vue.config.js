@@ -12,7 +12,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
-  publicPath: '/personal-website',
+  publicPath: '/personal-website/',
   lintOnSave: isDev,
   productionSourceMap: false,
   devServer: {
