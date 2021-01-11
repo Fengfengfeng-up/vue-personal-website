@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <meta charset="utf-8" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap"
+    />
+    <title>Freeisms</title>
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+      .loader {
+        position: absolute;
+        top: 10rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        font-size: 2em;
+        width: fit-content;
+      }
+      .loader .dots {
+        display: flex;
+        position: relative;
+        top: 20px;
+        left: -10px;
+        width: 100px;
+        animation: dots 4s ease infinite 1s;
+      }
+      .loader .dots div {
+        position: relative;
+        width: 10px;
+        height: 10px;
+        margin-right: 10px;
+        border-radius: 100%;
+        background-color: black;
+      }
+      .loader .dots div:nth-child(1) {
+        width: 0px;
+        height: 0px;
+        margin: 5px;
+        margin-right: 15px;
+        animation: show-dot 4s ease-out infinite 1s;
+      }
+      .loader .dots div:nth-child(4) {
+        background-color: transparent;
+        animation: dot-fall-left 4s linear infinite 1s;
+      }
+      .loader .dots div:nth-child(4):before {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        margin-right: 10px;
+        border-radius: 100%;
+        background-color: black;
+        content: '';
+        animation: dot-fall-top 4s cubic-bezier(0.46, 0.02, 0.94, 0.54) infinite
+          1s;
+      }
+
+      @keyframes dots {
+        0% {
+          left: -10px;
+        }
+        20%,
+        100% {
+          left: 10px;
+        }
+      }
+      @keyframes show-dot {
+        0%,
+        20% {
+          width: 0px;
+          height: 0px;
+          margin: 5px;
+          margin-right: 15px;
+        }
+        30%,
+        100% {
+          width: 10px;
+          height: 10px;
+          margin: 0px;
+          margin-right: 10px;
+        }
+      }
+      @keyframes dot-fall-left {
+        0%,
+        5% {
+          left: 0px;
+        }
+        100% {
+          left: 200px;
+        }
+      }
+      @keyframes dot-fall-top {
+        0%,
+        5% {
+          top: 0px;
+        }
+        30%,
+        100% {
+          top: 50vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="loader">
+        <div class="text">Loading</div>
+        <div class="dots">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <% if (NODE_ENV === 'production') { %>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+    <% } %>
+    <!-- <script>
+      // 判断浏览器是否支持webp格式
+      if (/webpAvaile=true/.test(document.cookie)) {
+        document.documentElement.className += 'webpa'
+        window.webpAvaile = true
+      }
+
+      window.lazySizesConfig = window.lazySizesConfig || {}
+      window.lazySizesConfig.init = false
+    </script> -->
+  </body>
+</html>

@@ -1,0 +1,120 @@
+
+// 文本不换行
+@mixin no-wrap(){
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 扩展点击区域
+@mixin extend-click(){
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
+
+// 多行文本溢出..
+@mixin multiEllipsis($line:3){
+  overflow : hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+// 清除浮动
+@mixin clearfix() {
+  &:before,
+  &:after {
+      content: "";
+      display: table;
+  }
+  &:after {
+      clear: both;
+  }
+}
+
+// 毛玻璃效果
+@mixin blur($pad: 15px, $radius: 10px, $blur: 20px) {
+  padding: $pad;
+  border-radius: $radius;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: fit-content;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur($blur);
+    margin: -30px;
+  }
+}
+
+// flex 布局
+@mixin flex ($direction: row, $justify-content: flex-start, $align-items: flex-start,$flex-wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-wrap: $flex-wrap;
+}
+
+
+// 滚动条样式
+@mixin scroll-style($thumb:rgba(255, 255, 255, 0.6), $track: rgba(255, 255, 255, 0)) {
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar-track {
+    border: none;
+    box-shadow: none;
+  }
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: $thumb;
+  }
+  &::-webkit-scrollbar-track {
+    background: $track;
+  }
+}
+
+// iPhone X 底部padding值
+@mixin iPhoneX-padding-bottom($paddingBottom: 0px) {
+  padding-bottom: $paddingBottom;
+  padding-bottom: calc(#{$paddingBottom} + constant(safe-area-inset-bottom));
+  padding-bottom: calc(#{$paddingBottom} + env(safe-area-inset-bottom));
+}
+
+// iPhone X fixed定位底部bottom值
+@mixin iPhoneX-fixed-bottom($bottom:0px) {
+  bottom: $bottom;
+  bottom: calc(#{$bottom} + constant(safe-area-inset-bottom));
+  bottom: calc(#{$bottom} + env(safe-area-inset-bottom));
+}
+
+// iPhone X fixed定位bottom为0的处理函数
+@mixin iPhoneX-fixed-bottom-zero($bgColor: #ffffff) {
+  @include iPhoneX-fixed-bottom();
+  &:after {
+    content: ' ';
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $bgColor;
+    height: constant(safe-area-inset-bottom);
+    height: env(safe-area-inset-bottom);
+  }
+}
