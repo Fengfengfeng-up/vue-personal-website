@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const isDev = process.env.NODE_ENV === 'development'
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -9,7 +10,6 @@ const port = process.env.port || process.env.npm_config_port || 3344 // dev port
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // const PrerenderSPAPlugin = require('prerender-spa-plugin')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
   publicPath: '/',
