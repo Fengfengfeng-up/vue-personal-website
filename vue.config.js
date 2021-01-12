@@ -60,7 +60,7 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-    // config.plugins.delete('preload')
+    config.plugins.delete('preload')
     // config.plugins.delete('prefetch')
 
     // set svg-sprite-loader
@@ -104,11 +104,9 @@ module.exports = {
 
     config
       // https://webpack.js.org/configuration/devtool/#development
-      .when(process.env.NODE_ENV === 'development', (config) =>
-        config.devtool('cheap-source-map')
-      )
+      .when(isDev, (config) => config.devtool('cheap-source-map'))
 
-    config.when(process.env.NODE_ENV !== 'development', (config) => {
+    config.when(isDev, (config) => {
       config
         .plugin('ScriptExtHtmlWebpackPlugin')
         .after('html')

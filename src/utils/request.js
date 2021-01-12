@@ -2,7 +2,7 @@ import axios from 'axios'
 import Vue from 'vue'
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_API || '/web/api',
+  baseURL: process.env.VUE_APP_API,
   timeout: 5000
 })
 
