@@ -102,6 +102,9 @@ export default {
         } else {
           this.blog.comments.forEach((c) => {
             if (c.id === parentId) {
+              if (!c.childrenComments) {
+                c.childrenComments = []
+              }
               c.childrenComments.push(comment)
               return
             }
