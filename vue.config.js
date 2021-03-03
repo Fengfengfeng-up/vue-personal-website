@@ -3,7 +3,7 @@ const path = require('path')
 const isDev = process.env.NODE_ENV === 'development'
 
 function resolve(dir) {
-  return path.join(__dirname, dir)
+  return path.resolve(__dirname, dir)
 }
 
 const port = process.env.port || process.env.npm_config_port || 3344 // dev port
@@ -12,6 +12,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
+  outputDir: resolve('../Nest-personal-website/front'),
   lintOnSave: isDev,
   productionSourceMap: false,
   devServer: {
@@ -60,7 +61,7 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-    config.plugins.delete('preload')
+    // config.plugins.delete('preload')
     // config.plugins.delete('prefetch')
 
     // set svg-sprite-loader
