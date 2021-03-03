@@ -6,7 +6,7 @@
     <p v-else-if="verbosity === 1">
       A man with a 😺 cat. 👨‍💻 Junior Front-End Dev focusing on
       <a target="_blank" href="https://cn.vuejs.org/">Vue</a>
-      in Kunming. likes 📚 reading and 🎲 gaming.
+      in Chengdu. likes 📚 reading and 🎲 gaming.
     </p>
     <p v-else-if="verbosity === 2">
       I am from
@@ -17,8 +17,8 @@
       and currently living in
       <a
         target="_blank"
-        href="https://baike.baidu.com/item/%E6%98%86%E6%98%8E/161012"
-      >Kunming</a>
+        href="https://baike.baidu.com/item/%E6%88%90%E9%83%BD/128473"
+      >Chengdu</a>
       with a 😺 cat. I'm a 👨‍💻 Junior Front-End Web Developer primarily focusing
       on the
       <svg-icon icon="vue" class-name="vue-icon" /> &nbsp;
