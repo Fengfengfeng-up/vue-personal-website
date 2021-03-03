@@ -10,8 +10,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "copy": "bash test.sh"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.21.0",
