@@ -5,7 +5,7 @@
       <div class="top-background" />
       <section>
         <h1>
-          😺 Hi there! This is Xiao Qi, from Cat-Planet, welcome to my life.
+          Hey there! This is Xiaoqi, from Cat Planet, nice to meet you~ 😺
         </h1>
         <!--         <div class="search">
           <input
@@ -35,7 +35,7 @@
               :alt="`${item.title} | ${item.summary}`"
             >
             <div class="img-info">
-              <span>{{ item.title }}</span>
+              <span>{{ item.time }}</span>
               <div>
                 <a
                   :href="item.file"
@@ -112,16 +112,16 @@ export default {
   background-image: url($url+'.'+$type);
   background-repeat: no-repeat;
   background-size: cover;
-  @at-root .webpa & {
-    background-image: url($url+'.webp');
-  }
+  // @at-root .webpa & {
+  //   background-image: url($url+'.webp');
+  // }
 }
 .cat {
   min-height: calc(100vh + 1px);
   .top {
     width: 100%;
     overflow: hidden;
-    height: 60vh;
+    height: 75vh;
     min-height: 400px;
     display: flex;
     justify-content: center;
@@ -165,9 +165,10 @@ export default {
       z-index: 2;
       color: var(--white);
       width: 100%;
-      max-width: 650px;
+      max-width: 750px;
       h1 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
+        line-height: 1.5;
       }
       /* .search {
         position: relative;
