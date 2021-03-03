@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "author": {
-    "name": "Feng Han",
+    "name": "Han Feng",
     "email": "1010423552@qq.com",
     "url": "https://www.striveforus.com"
   },
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "copy": "bash test.sh"
   },
   "dependencies": {
     "axios": "^0.21.0",
