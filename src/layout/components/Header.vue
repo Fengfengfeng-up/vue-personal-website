@@ -16,6 +16,7 @@
           :to="item.url"
           class="link"
         >{{ item.label }}</router-link>
+        <a class="link" href="https://fh-notebook.vercel.app/" target="_blank">Notebook</a>
       </div>
       <div class="nav-icons">
         <a
@@ -34,7 +35,7 @@
           <svg-icon icon="github" />
         </a>
         <a
-          href="https://Fengfengfeng-up.github.io"
+          href="https://fh-notebook.vercel.app/"
           target="_blank"
           class="link"
         >
@@ -59,6 +60,7 @@
           class="link"
           @click.native="mobileMenu = false"
         >{{ item.label }}</router-link>
+        <a class="link" href="https://fengfengfeng-up.github.io/" target="_blank">Notebook</a>
       </div>
     </div>
   </div>
@@ -83,10 +85,6 @@ export default {
         {
           label: 'Music',
           url: '/music'
-        },
-        {
-          label: 'Work',
-          url: '/work'
         }
       ]
     }
@@ -100,7 +98,7 @@ export default {
     this.$bus.$on('change-mode', (mode) => {
       this.mode = mode
     })
-    this.changeTheme(localStorage.getItem('mode') || 'light-mode')
+    this.changeTheme(localStorage.getItem('mode') || 'dark-mode')
   },
   mounted() {
     window.addEventListener('scroll', () => {
