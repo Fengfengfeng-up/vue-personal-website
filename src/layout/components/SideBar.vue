@@ -5,10 +5,23 @@
         精选文章
       </header>
       <ul class="post-highlights-list">
-        <li v-for="item in list" :key="item.id">
+        <li v-for="item in blogs" :key="item.id">
           <router-link :to="`/blog/${item.id}`">{{ item.title }}</router-link>
         </li>
       </ul>
+    </div>
+    <div class="tags">
+      <header>标签</header>
+      <div class="tags-list">
+        <div
+          v-for="item in tags"
+          :key="item.name + item.id"
+          class="tags-list-item"
+          @click="handleClickTag(item.id)"
+        >
+          {{ item.name }}
+        </div>
+      </div>
     </div>
     <div class="message">
       <header>
@@ -44,12 +57,13 @@ export default {
   data() {
     return {
       message: '',
-      list: [],
+      blogs: [],
       tags: []
     }
   },
   created() {
     this.getHighlights()
+    this.getTags()
   },
   methods: {
     async leaveMessage() {
@@ -74,9 +88,26 @@ export default {
         const res = await this.$http('/blogs/list', {
           params: { page: 1, size: 5 }
         })
-        this.list = res.data
+        this.blogs = res.data
       } catch (err) {
         console.log(err)
+      }
+    },
+    async getTags() {
+      try {
+        const res = await this.$http('/tags/list')
+        this.tags = res.data.filter(
+          (t) => t.name !== '小七' && t.name !== '十一'
+        ).sort(() => Math.random() - 0.5)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    handleClickTag(tagId) {
+      if (this.$route.path !== '/blog') {
+        this.$router.push({ path: '/blog', query: { tagId }})
+      } else {
+        this.$router.replace({ path: '/blog', query: { tagId }})
       }
     }
   }
@@ -89,6 +120,7 @@ export default {
   padding: 0 1rem;
 }
 .post-highlights,
+.tags,
 .message {
   border: 1px solid var(--blue-dark);
   margin: 1rem 0px;
@@ -135,6 +167,23 @@ export default {
   }
 }
 
+.tags {
+  &-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    &-item {
+      cursor: pointer;
+      padding: 0.3rem 0.4rem;
+      &:hover {
+        border-radius: 0.3rem;
+        background-color: var(--gray-lightest);
+      }
+    }
+  }
+}
+
 .message {
   form {
     padding: 0px 1rem;
@@ -176,11 +225,19 @@ export default {
 
 body.dark-mode {
   .post-highlights-list,
+  .tags,
   .message {
     background-color: rgb(26, 25, 25);
     color: rgb(238, 238, 238);
     li a:hover {
       background-color: var(--gray-darker);
+    }
+  }
+  .tags {
+    &-list {
+      &-item:hover {
+        background-color: var(--gray-darker);
+      }
     }
   }
 }
