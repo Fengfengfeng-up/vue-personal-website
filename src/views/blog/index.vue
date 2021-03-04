@@ -12,7 +12,7 @@
     </div>
     <h2>
       {{
-        searchValue
+        searchValue || $route.query.tagId
           ? blogs.length + ' Article Matches'
           : total + ' Total Articles'
       }}
@@ -30,12 +30,16 @@ export default {
   data() {
     return {
       blogs: [],
+      cache: [],
       total: '',
       searchValue: ''
     }
   },
   created() {
     this.getBlogs()
+    this.$watch('$route.query', ({ tagId }) => this.filterBlogs(tagId), {
+      deep: true
+    })
   },
   methods: {
     async getBlogs() {
@@ -44,9 +48,16 @@ export default {
         this.blogs = res.data
         this.cache = res.data
         this.total = res.total
+        this.filterBlogs(this.$route.query.tagId)
       } catch (err) {
         console.log(err)
       }
+    },
+    filterBlogs(id) {
+      if (!id) return
+      this.blogs = this.cache.filter((blog) =>
+        blog.tags.some((t) => t.id === +id)
+      )
     },
     searchBlogs(e) {
       const value = e.target.value.trim()

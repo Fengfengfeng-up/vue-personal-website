@@ -17,8 +17,13 @@
             <svg-icon icon="date" width="16" height="16" />
             <span>{{ $formatTime(item.createAt) }}</span></span>
         </div>
-        <div class="bottom">
+        <div class="middle">
           <p>{{ item.intro }}</p>
+        </div>
+        <div class="bottom">
+          <span v-for="tag in item.tags" :key="tag.name + tag.id" class="tag">
+            {{ tag.name }}
+          </span>
         </div>
       </router-link>
     </li>
@@ -93,8 +98,15 @@ export default {
         }
       }
     }
-    .bottom p {
-      margin: 0px;
+    .middle p {
+      margin: 0 0 1rem;
+    }
+    .bottom {
+      .tag {
+        font-size: var(--font-smaller);
+        padding-right: .3rem;
+        color: var(--gray);
+      }
     }
   }
 }
