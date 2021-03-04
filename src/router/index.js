@@ -40,12 +40,12 @@ const routes = [
         component: () => import('@v/music/index'),
         meta: { title: 'Music' }
       },
-      {
-        path: '/work',
-        name: 'Work',
-        component: () => import('@v/work/index'),
-        meta: { title: 'Work' }
-      },
+      // {
+      //   path: '/work',
+      //   name: 'Work',
+      //   component: () => import('@v/work/index'),
+      //   meta: { title: 'Work' }
+      // },
       {
         path: '*',
         redirect: '/'
@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
   const title = to.meta.title
   title && Vue.prototype.$setTitle(title)
 
-  if (['Music', 'Work'].includes(to.name)) {
+  if (['Music'].includes(to.name)) {
     Vue.prototype.$message({ message: '努力筹备中...' })
     next({ path: from.path })
   }
