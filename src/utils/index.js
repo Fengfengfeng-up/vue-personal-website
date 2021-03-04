@@ -19,20 +19,22 @@ export function formatTime(time, options = {}) {
 
   if (year > 0) {
     if (Math.abs(month) <= 2) {
-      return `${month > 0 ? 'over' : 'about'} ${year} year${year > 1 ? 's' : ''} ago`
+      return `${month > 0 ? 'over' : ''} ${year} year${year > 1 ? 's' : ''} ago`
     }
 
     if (month > 10) {
-      return `almost ${year + 1} years ago`
+      // almost
+      return `${year + 1} years ago`
     }
   }
 
   if (Math.abs(month) !== 0) {
     if (Math.abs(day) <= 2) {
-      return `${day > 0 ? 'over' : 'about'} ${month} month${month > 1 ? 's' : ''} ago`
+      return `${day > 0 ? 'over' : ''} ${month} month${month > 1 ? 's' : ''} ago`
     }
     if (day > 25) {
-      return `almost ${month + 1} months`
+      // almost
+      return `${month + 1} months ago`
     }
   }
 
@@ -41,15 +43,15 @@ export function formatTime(time, options = {}) {
     if (hour === 0) {
       const minute = dayjs().diff(dayjs(time), 'm')
       if (minute >= 1) {
-        return `about ${minute} minute${minute > 1 ? 's' : ''} ago`
+        return `${minute} minute${minute > 1 ? 's' : ''} ago`
       }
       return 'just now'
     }
 
-    return `about ${hour} hour${hour > 1 ? 's' : ''} ago`
+    return `${hour} hour${hour > 1 ? 's' : ''} ago`
   }
 
-  return `about ${Math.abs(day)} days ago`
+  return `${Math.abs(day)} days ago`
 }
 
 /**
