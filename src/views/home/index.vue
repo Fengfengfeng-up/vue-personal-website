@@ -119,7 +119,7 @@ export default {
     async getLastestContent() {
       try {
         const res = await this.$http('/blogs/list', {
-          params: { page: 1, size: 6 }
+          params: { page: 1, size: 5 }
         })
         this.content = res.data
       } catch (err) {
