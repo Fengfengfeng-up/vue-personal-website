@@ -12,7 +12,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
-  outputDir: resolve('../Nest-personal-website/front'),
+  outputDir: resolve('../nest-personal-website/front'),
   lintOnSave: isDev,
   productionSourceMap: false,
   devServer: {
