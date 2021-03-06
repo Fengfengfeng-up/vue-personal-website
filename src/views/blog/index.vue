@@ -27,6 +27,11 @@ import BlogList from './components/BlogList'
 export default {
   name: 'Blog',
   components: { BlogList },
+  beforeRouteUpdate(to, from, next) {
+    console.log(to)
+    this.filterBlogs(to.query.tagId)
+    next()
+  },
   data() {
     return {
       blogs: [],
@@ -37,9 +42,6 @@ export default {
   },
   created() {
     this.getBlogs()
-    this.$watch('$route.query', ({ tagId }) => this.filterBlogs(tagId), {
-      deep: true
-    })
   },
   methods: {
     async getBlogs() {
@@ -54,7 +56,10 @@ export default {
       }
     },
     filterBlogs(id) {
-      if (!id) return
+      if (!id) {
+        this.blogs = this.cache
+        return
+      }
       this.blogs = this.cache.filter((blog) =>
         blog.tags.some((t) => t.id === +id)
       )

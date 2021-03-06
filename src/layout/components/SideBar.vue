@@ -13,14 +13,15 @@
     <div class="tags">
       <header>标签</header>
       <div class="tags-list">
-        <div
+        <router-link
           v-for="item in tags"
           :key="item.name + item.id"
           class="tags-list-item"
-          @click="handleClickTag(item.id)"
+          tag="div"
+          :to="{ path: '/blog', query: { tagId: item.id } }"
         >
           {{ item.name }}
-        </div>
+        </router-link>
       </div>
     </div>
     <div class="message">
@@ -96,18 +97,11 @@ export default {
     async getTags() {
       try {
         const res = await this.$http('/tags/list')
-        this.tags = res.data.filter(
-          (t) => t.name !== '小七' && t.name !== '十一'
-        ).sort(() => Math.random() - 0.5)
+        this.tags = res.data
+          .filter((t) => t.name !== '小七' && t.name !== '十一')
+          .sort(() => Math.random() - 0.5)
       } catch (err) {
         console.log(err)
-      }
-    },
-    handleClickTag(tagId) {
-      if (this.$route.path !== '/blog') {
-        this.$router.push({ path: '/blog', query: { tagId }})
-      } else {
-        this.$router.replace({ path: '/blog', query: { tagId }})
       }
     }
   }
