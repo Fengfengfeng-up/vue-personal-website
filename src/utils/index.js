@@ -17,9 +17,13 @@ export function formatTime(time, options = {}) {
   const month = dayjs().diff(dayjs(time), 'M')
   const day = dayjs().diff(dayjs(time), 'd')
 
-  if (year > 0) {
+  if (year >= 0) {
     if (Math.abs(month) <= 2) {
       return `${month > 0 ? 'over' : ''} ${year} year${year > 1 ? 's' : ''} ago`
+    }
+
+    if (month < 0) {
+      return `${12 - Math.abs(month)} months ago`
     }
 
     if (month > 10) {
@@ -32,6 +36,7 @@ export function formatTime(time, options = {}) {
     if (Math.abs(day) <= 2) {
       return `${day > 0 ? 'over' : ''} ${month} month${month > 1 ? 's' : ''} ago`
     }
+
     if (day > 25) {
       // almost
       return `${month + 1} months ago`
