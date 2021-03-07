@@ -11,7 +11,6 @@ body,
   transition: background-color 0.3s ease;
 }
 
-
 html {
   font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
     Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
@@ -63,8 +62,13 @@ html {
 @media screen and (min-width: 500px) {
   body::before {
     content: 'largeDevice';
-    display: none
+    display: none;
   }
+}
+
+body,
+#app {
+  height: fit-content;
 }
 
 body.light-mode {
@@ -75,7 +79,7 @@ body.light-mode {
 body.dark-mode {
   background-color: #1a1919;
   color: #eee;
-  
+
   #app::before {
     opacity: 1;
   }
