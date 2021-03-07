@@ -108,14 +108,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@mixin webp($url, $type) {
-  background-image: url($url+'.'+$type);
-  background-repeat: no-repeat;
-  background-size: cover;
-  // @at-root .webpa & {
-  //   background-image: url($url+'.webp');
-  // }
-}
+// @mixin webp($url, $type) {
+//   background-image: url($url+'.'+$type);
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   @at-root .webpa & {
+//     background-image: url($url+'.webp');
+//   }
+// }
 .cat {
   min-height: calc(100vh + 1px);
   .top {
@@ -136,7 +136,10 @@ export default {
       left: 0;
       width: 100%;
       overflow: hidden;
-      @include webp('../../assets/image/cat', 'png');
+      // @include webp('../../assets/image/cat', 'png');
+      background-image: url(https://cdn.striveforus.com/IMG_7583.JPG);
+      background-size: contain;
+      background-position: center center;
     }
     &:before {
       content: '';
