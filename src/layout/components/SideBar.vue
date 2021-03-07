@@ -24,7 +24,7 @@
         </router-link>
       </div>
     </div>
-    <div class="message">
+    <div v-show="$route.path === '/'" class="message">
       <header>
         留言
       </header>

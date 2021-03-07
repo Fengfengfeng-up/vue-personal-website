@@ -32,7 +32,7 @@ const routes = [
         props: true,
         component: () =>
           import(/* webpackChunkName: "group-blog" */ '@v/blog/detail'),
-        meta: { slideBar: true }
+        meta: { }
       },
       {
         path: '/music',

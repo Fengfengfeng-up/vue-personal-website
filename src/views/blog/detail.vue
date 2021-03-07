@@ -1,6 +1,7 @@
 <template>
   <div class="blog">
     <div ref="blog" v-html="html" />
+    <Directory v-if="blog" class="directory" />
     <Comment
       v-if="blog"
       :data="blog.comments"
@@ -16,11 +17,12 @@
 // import 'highlight.js/styles/monokai.css'
 // import 'highlight.js/styles/qtcreator_dark.css'
 import BlogInfo from './components/BlogInfo'
+import Directory from './components/Directory'
 import Comment from '@c/Comment'
 import hljs from 'highlight.js'
 export default {
   name: 'BlogDetail',
-  components: { Comment },
+  components: { Directory, Comment },
   inject: ['app'],
   props: {
     id: {
@@ -40,7 +42,7 @@ export default {
     id: {
       immediate: true,
       handler(id) {
-        if (typeof +id !== 'number' || isNaN(+id)) {
+        if (isNaN(id)) {
           this.$router.replace('/blog')
           return
         }
@@ -140,3 +142,29 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.directory {
+  list-style: none;
+  padding: .5rem;
+  padding-left: 1.5rem;
+  border-left: 5px solid var(--blue-dark);
+  font-size: 1.05rem;
+  color: var(--blue-dark);
+  position: fixed;
+  top: 6rem;
+  right: 3%;
+}
+
+@media screen and (max-width: 1000px) {
+  .directory {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .directory {
+    right: 8%;
+  }
+}
+</style>
