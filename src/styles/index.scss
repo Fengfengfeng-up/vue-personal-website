@@ -11,6 +11,7 @@ body,
   transition: background-color 0.3s ease;
 }
 
+
 html {
   font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
     Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
@@ -74,6 +75,25 @@ body.light-mode {
 body.dark-mode {
   background-color: #1a1919;
   color: #eee;
+  
+  #app::before {
+    opacity: 1;
+  }
+}
+
+#app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  z-index: -1;
+  background-image: url('../assets/image/2590971-200.png');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  background-position: center center;
 }
 
 a {
