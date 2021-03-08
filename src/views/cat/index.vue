@@ -12,7 +12,7 @@
       </section>
     </div>
     <div class="img-container">
-      <h1>All Of Me 😺</h1>
+      <h1>小七 & 十一 😺</h1>
       <vue-masonry-wall
         :items="cats"
         :options="{ width: 400, padding: 12 }"
