@@ -7,19 +7,8 @@
         <h1>
           What's up! This is Xiaoqi, nice to meet you~
         </h1>
-        <!--         <div class="search">
-          <input
-            :value="searchValue"
-            placeholder="呆头鹅"
-            class="search-cat"
-            type="text"
-            @input="(e) => (searchValue = e.target.value.trim())"
-          >
-          <svg-icon icon="search" class-name="search-icon" />
-        </div> -->
       </section>
     </div>
-    <!-- <div class="cat-tags" /> -->
     <div class="img-container">
       <h1>All Of Me 😺</h1>
       <vue-masonry-wall
@@ -28,7 +17,7 @@
         @append="getCats"
       >
         <template #default="{ item }">
-          <div class="cat-item">
+          <div tag="div" class="cat-item">
             <img
               :src="item.file"
               :title="`${item.title} | ${item.summary}`"
@@ -43,12 +32,15 @@
                 ><svg-icon
                   icon="download"
                 /></a>
-                <a
-                  :class="{ liked: item._liked }"
-                  @click="likeCat(item)"
-                ><svg-icon
-                  icon="heart"
-                /></a>
+                <div class="like">
+                  <a
+                    :class="{ liked: item._liked }"
+                    @click="likeCat(item)"
+                  ><svg-icon
+                    icon="heart"
+                  /></a>
+                  <span class="likes">{{ item.likes }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -70,7 +62,6 @@ export default {
     return {
       cats: [],
       isEmpty: false
-      // searchValue: ''
     }
   },
   methods: {
@@ -96,9 +87,11 @@ export default {
       }
     },
     async likeCat(cat) {
+      if (cat._liked) return
       try {
         await this.$http.patch(`/cats/${cat.id}`)
         cat._liked = !cat._liked
+        cat.likes++
       } catch (err) {
         console.log(err)
       }
@@ -117,6 +110,7 @@ export default {
 //   }
 // }
 .cat {
+  width: 100vw;
   min-height: calc(100vh + 1px);
   .top {
     width: 100%;
@@ -173,25 +167,6 @@ export default {
         font-size: 2.1rem;
         line-height: 1.4;
       }
-      /* .search {
-        position: relative;
-        input {
-          width: 100%;
-          font-size: var(--font-small);
-          padding: 0.8rem 4rem 0.8rem 1rem;
-          border-radius: 0.5rem;
-          outline: none;
-          border: none;
-        }
-        &-icon {
-          color: var(--gray-darker);
-          position: absolute;
-          right: 1rem;
-          top: 50%;
-          transform: translateY(-50%);
-          cursor: pointer;
-        }
-      } */
     }
   }
   .img-container {
@@ -203,6 +178,7 @@ export default {
     }
     .cat-item {
       position: relative;
+      cursor: pointer;
       &::before {
         content: '';
         pointer-events: none;
@@ -244,6 +220,17 @@ export default {
         justify-content: space-between;
         opacity: 0;
         z-index: 2;
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          &.like {
+            a {
+              margin-right: 0.2rem;
+            }
+          }
+        }
+
         span,
         a {
           opacity: 0.8;
@@ -258,8 +245,6 @@ export default {
         }
         a {
           cursor: pointer;
-        }
-        a:first-child {
           margin-right: 1rem;
         }
       }

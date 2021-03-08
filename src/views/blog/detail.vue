@@ -42,11 +42,6 @@ export default {
     id: {
       immediate: true,
       handler(id) {
-        if (isNaN(id)) {
-          this.$router.replace('/blog')
-          return
-        }
-
         this.blog = this.$route.params.blog
         if (!this.blog) {
           this.getBlog(id)

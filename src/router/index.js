@@ -3,6 +3,13 @@ import VueRouter from 'vue-router'
 import Default from '@/layout'
 Vue.use(VueRouter)
 
+const checkParam = (to, from, next) => {
+  if (isNaN(to.params.id)) {
+    next(from.path)
+  }
+  next()
+}
+
 const routes = [
   {
     path: '/cat',
@@ -18,7 +25,7 @@ const routes = [
         path: '/',
         name: 'Home',
         component: () => import(/* webpackChunkName: "home" */ '@v/home'),
-        meta: { title: 'Freesism', slideBar: true }
+        meta: { title: 'Freeisms', slideBar: true }
       },
       {
         path: '/blog',
@@ -30,22 +37,10 @@ const routes = [
         path: '/blog/:id',
         name: 'BlogDetail',
         props: true,
-        component: () =>
-          import(/* webpackChunkName: "group-blog" */ '@v/blog/detail'),
-        meta: { }
+        component: () => import(/* webpackChunkName: "group-blog" */ '@v/blog/detail'),
+        meta: {},
+        beforeEnter: checkParam
       },
-      {
-        path: '/music',
-        name: 'Music',
-        component: () => import('@v/music/index'),
-        meta: { title: 'Music' }
-      },
-      // {
-      //   path: '/work',
-      //   name: 'Work',
-      //   component: () => import('@v/work/index'),
-      //   meta: { title: 'Work' }
-      // },
       {
         path: '*',
         redirect: '/'
@@ -55,7 +50,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -70,10 +65,10 @@ router.beforeEach((to, from, next) => {
   const title = to.meta.title
   title && Vue.prototype.$setTitle(title)
 
-  if (['Music'].includes(to.name)) {
-    Vue.prototype.$message({ message: '努力筹备中...' })
-    next({ path: from.path })
-  }
+  // if ([].includes(to.name)) {
+  //   Vue.prototype.$message({ message: '努力筹备中...' })
+  //   next({ path: from.path })
+  // }
 
   next()
 })

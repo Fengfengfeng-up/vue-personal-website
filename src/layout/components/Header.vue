@@ -4,7 +4,7 @@
       <router-link to="/" class="link logo-name">
         <img
           class="logo"
-          alt="Manorism Logo"
+          alt="Freeisms Logo"
           src="../../assets/image/logo1.png"
         >
         <span class="name">Freeisms</span>
@@ -60,7 +60,7 @@
           class="link"
           @click.native="mobileMenu = false"
         >{{ item.label }}</router-link>
-        <a class="link" href="https://fengfengfeng-up.github.io/" target="_blank">Notebook</a>
+        <a class="link" href="https://fh-notebook.vercel.app/" target="_blank">Notebook</a>
       </div>
     </div>
   </div>
@@ -81,10 +81,6 @@ export default {
         {
           label: 'Cat',
           url: '/cat'
-        },
-        {
-          label: 'Music',
-          url: '/music'
         }
       ]
     }

@@ -1,5 +1,5 @@
 <template>
-  <div ref="to-top-btn" class="to-top" @click="ToTop">
+  <div class="to-top" @click="ToTop">
     <div>Top</div>
     <svg class="to-top-svg">
       <circle
@@ -22,11 +22,9 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
-    this.$refs['to-top-btn'].addEventListener('touch', this.handleScroll)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
-    this.$refs['to-top-btn'].removeEventListener('touch', this.handleScroll)
   },
   methods: {
     handleScroll() {
