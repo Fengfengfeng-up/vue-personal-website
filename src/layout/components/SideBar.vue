@@ -6,7 +6,9 @@
       </header>
       <ul class="post-highlights-list">
         <li v-for="item in blogs" :key="item.id">
-          <router-link :to="`/blog/${item.id}`">{{ item.title }}</router-link>
+          <router-link
+            :to="{ name: 'BlogDetail', params: { id: item.id, blog: item } }"
+          >{{ item.title }}</router-link>
         </li>
       </ul>
     </div>
@@ -86,8 +88,8 @@ export default {
     },
     async getHighlights() {
       try {
-        const res = await this.$http('/blogs/list', {
-          params: { page: 1, size: 5 }
+        const res = await this.$http('/blogs/highlights', {
+          params: { size: 5 }
         })
         this.blogs = res.data
       } catch (err) {
