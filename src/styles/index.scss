@@ -79,10 +79,6 @@ body.light-mode {
 body.dark-mode {
   background-color: #1a1919;
   color: #eee;
-
-  #app::before {
-    opacity: 1;
-  }
 }
 
 a {

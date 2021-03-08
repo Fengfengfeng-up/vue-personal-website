@@ -5,7 +5,9 @@
       <div class="top-background" />
       <section>
         <h1>
-          What's up! This is Xiaoqi, nice to meet you~
+          "Taking the sourest lemon that life has to offer and turning it into
+          something resembling lemonade."
+          <div class="quote">- This Is Us</div>
         </h1>
       </section>
     </div>
@@ -131,9 +133,9 @@ export default {
       width: 100%;
       overflow: hidden;
       // @include webp('../../assets/image/cat', 'png');
-      background-image: url(https://cdn.striveforus.com/IMG_7583.JPG);
-      background-size: contain;
-      background-position: center center;
+      background-image: url('../../assets/image/bg.png');
+      background-size: 10rem;
+      opacity: .2;
     }
     &:before {
       content: '';
@@ -142,14 +144,6 @@ export default {
       left: 0;
       right: 0;
       bottom: 0;
-      background: -webkit-gradient(
-          linear,
-          left top,
-          left bottom,
-          from(rgba(0, 0, 0, 0.2)),
-          to(rgba(0, 0, 0, 0.2))
-        ),
-        -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(transparent));
       background: linear-gradient(
           180deg,
           rgba(0, 0, 0, 0.2) 0%,
@@ -159,13 +153,20 @@ export default {
       z-index: 1;
     }
     section {
+      position: relative;
       z-index: 2;
       color: var(--white);
       width: 100%;
       max-width: 750px;
       h1 {
-        font-size: 2.1rem;
-        line-height: 1.4;
+        font-size: 2rem;
+        line-height: 1.5;
+        .quote {
+          margin-top: 1.5rem;
+          font-size: 1.5rem;
+          text-align: right;
+          color: var(--gray-light);
+        }
       }
     }
   }
@@ -175,6 +176,7 @@ export default {
     user-select: none;
     h1 {
       text-align: center;
+      padding: 2rem 0 1rem;
     }
     .cat-item {
       position: relative;
@@ -251,6 +253,15 @@ export default {
           margin-right: 1rem;
         }
       }
+    }
+  }
+}
+
+body.dark-mode {
+  .cat .top {
+    background-color: var(--gray-dark);
+    &-background {
+      opacity: 1;
     }
   }
 }
