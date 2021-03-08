@@ -94,7 +94,8 @@ export default {
   },
   created() {
     // 判断屏幕宽度是否大于500px
-    const isLargeDevice = getComputedStyle(document.body, '::before').content === `"largeDevice"`
+    const isLargeDevice =
+      getComputedStyle(document.body, '::before').content === `"largeDevice"`
     this.init({ matches: isLargeDevice })
     this.getLastestContent()
 
@@ -182,7 +183,12 @@ export default {
         min-width: auto;
         display: block;
         margin-bottom: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 2px;
+        padding: 5px;
+        box-shadow: inset 0 0 10px #b3b3b399;
+        transition: transform 1s;
+        &:hover {
+          transform: rotate(1turn);
+        }
       }
       label {
         font-size: var(--font-small);
