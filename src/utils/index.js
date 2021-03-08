@@ -29,12 +29,18 @@ export function formatTime(time, options = {}) {
     if (month > 10) {
       // almost
       return `${year + 1} years ago`
-    } else return `${month} month${month > 1 ? 's' : ''} ago`
+    }
+
+    if (month !== 0) {
+      return `${month} month${month > 1 ? 's' : ''} ago`
+    }
   }
 
   if (Math.abs(month) !== 0) {
     if (Math.abs(day) <= 2) {
-      return `${day > 0 ? 'over' : ''} ${month} month${month > 1 ? 's' : ''} ago`
+      return `${day > 0 ? 'over' : ''} ${month} month${
+        month > 1 ? 's' : ''
+      } ago`
     }
 
     if (day > 25) {
