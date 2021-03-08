@@ -28,7 +28,7 @@
           <svg-icon :icon="mode === 'light-mode' ? 'moon' : 'sun'" />
         </a>
         <a
-          href="https://github.com/Fengfengfeng-up"
+          href="https://github.com/Fengfengfeng-up/vue-personal-website"
           target="_blank"
           class="link"
         >
