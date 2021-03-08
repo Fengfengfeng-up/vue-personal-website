@@ -8,7 +8,6 @@
     </div>
     <SideBar v-show="$route.meta.slideBar" />
     <Footer v-once />
-    <ToTop v-once />
   </div>
 </template>
 
@@ -16,9 +15,8 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
-import ToTop from './components/ToTop'
 export default {
-  components: { Header, Footer, SideBar, ToTop },
+  components: { Header, Footer, SideBar },
   provide() {
     const that = this
     return {
