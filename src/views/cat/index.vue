@@ -5,7 +5,7 @@
       <div class="top-background" />
       <section>
         <h1>
-          Hey there! This is Xiaoqi, from Cat Planet, nice to meet you~ 😺
+          What's up! This is Xiaoqi, nice to meet you~
         </h1>
         <!--         <div class="search">
           <input
@@ -21,7 +21,7 @@
     </div>
     <!-- <div class="cat-tags" /> -->
     <div class="img-container">
-      <h1>All Of Me</h1>
+      <h1>All Of Me 😺</h1>
       <vue-masonry-wall
         :items="cats"
         :options="{ width: 400, padding: 12 }"
@@ -170,8 +170,8 @@ export default {
       width: 100%;
       max-width: 750px;
       h1 {
-        font-size: 2.2rem;
-        line-height: 1.5;
+        font-size: 2.1rem;
+        line-height: 1.4;
       }
       /* .search {
         position: relative;
