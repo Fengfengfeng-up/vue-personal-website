@@ -179,6 +179,9 @@ export default {
     .cat-item {
       position: relative;
       cursor: pointer;
+      img {
+        border-radius: 0.3rem;
+      }
       &::before {
         content: '';
         pointer-events: none;
