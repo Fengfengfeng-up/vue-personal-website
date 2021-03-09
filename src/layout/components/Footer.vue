@@ -15,12 +15,12 @@
   justify-content: center;
   align-items: flex-end;
   font-size: var(--font-smaller);
+  letter-spacing: 1px;
   .text {
     padding: 1rem;
     color: var(--gray);
     span {
       font-weight: 500;
-      letter-spacing: 1px;
     }
   }
 }

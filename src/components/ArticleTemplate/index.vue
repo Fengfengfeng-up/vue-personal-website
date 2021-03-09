@@ -1,10 +1,11 @@
 <template>
-  <div class="blog">
-    <div ref="blog" v-html="html" />
-    <Directory v-if="blog" class="directory" />
+  <div class="article">
+    <div ref="article" v-html="article.html" />
+    <Directory v-if="article.html" class="directory" />
+    <Relation :prev="article.prev" :next="article.next" />
     <Comment
-      v-if="blog"
-      :data="blog.comments"
+      v-if="isBlog"
+      :data="article.comments"
       @submit="submitComment"
       @like="likeComment"
     />
@@ -16,13 +17,14 @@
 // import 'highlight.js/styles/monokai-sublime.css'
 // import 'highlight.js/styles/monokai.css'
 // import 'highlight.js/styles/qtcreator_dark.css'
-import BlogInfo from './components/BlogInfo'
+import Info from './components/Info'
+import Relation from './components/Relation'
 import Directory from './components/Directory'
 import Comment from '@c/Comment'
 import hljs from 'highlight.js'
 export default {
-  name: 'BlogDetail',
-  components: { Directory, Comment },
+  name: 'ArticleTemplate',
+  components: { Directory, Relation, Comment },
   inject: ['app'],
   props: {
     id: {
@@ -32,49 +34,55 @@ export default {
   },
   data() {
     return {
-      blog: {
-        title: ''
-      },
-      html: ''
+      article: {}
+    }
+  },
+  computed: {
+    isBlog({ $route }) {
+      return $route.name === 'BlogDetail'
     }
   },
   watch: {
     id: {
       immediate: true,
-      handler(id) {
-        this.blog = this.$route.params.blog
-        if (!this.blog) {
-          this.getBlog(id)
-          return
-        }
-      }
-    },
-    blog: {
-      immediate: true,
-      handler(blog) {
-        if (blog && Object.keys(blog).length > 0) {
-          this.$setTitle(blog.title)
-          this.html = blog.html
-          this.$nextTick(() => {
-            this.addComponents(blog)
-            this.$refs.blog.querySelectorAll('pre code').forEach((block) => {
-              hljs.highlightBlock(block)
-            })
-          })
-        }
+      async handler(id) {
+        this.article = this.$route.params.article || (await this.getArticle(id))
+        this.init(this.article)
       }
     }
   },
   methods: {
-    addComponents({ author, words, createAt }) {
-      const _Vue = Object.getPrototypeOf(this.$root).constructor // 获取Vue构造函数
-      const _BlogInfo = _Vue.extend(BlogInfo)
-      const data = { author, words, createAt }
-      const infoDom = new _BlogInfo({ propsData: { data }}).$mount().$el // 拿到基础信息组件挂载后的DOM
+    init({ title, author, words, createAt, type }) {
+      if (!title) return
 
-      const blogDom = this.$refs.blog
-      const afterTitle = blogDom.querySelector('h1').nextSibling
-      blogDom.insertBefore(infoDom, afterTitle) // 将基础信息组件DOM插入到标题之后
+      this.$setTitle(title)
+      this.$nextTick(() => {
+        this.$refs.article
+          .querySelectorAll('pre code')
+          .forEach((block) => hljs.highlightBlock(block))
+
+        if (this.isBlog) {
+          this.addInfoComponent({ author, words, createAt })
+        }
+      })
+    },
+    addInfoComponent(data) {
+      const _Vue = Object.getPrototypeOf(this.$root).constructor // 获取Vue构造函数
+      const _Info = _Vue.extend(Info)
+      const infoDom = new _Info({ propsData: { data }}).$mount().$el // 拿到基础信息组件挂载后的DOM
+
+      const ArticleDom = this.$refs.article
+      const afterTitle = ArticleDom.querySelector('h1').nextSibling
+      ArticleDom.insertBefore(infoDom, afterTitle) // 将基础信息组件DOM插入到标题之后
+    },
+    async getArticle(id) {
+      const url = `/blogs/${this.isBlog ? '' : 'leetcode/'}${id}`
+      try {
+        const res = await this.$http(url)
+        return res.data
+      } catch (err) {
+        console.log(err)
+      }
     },
     async submitComment({ callback, ...params }) {
       if (!this.app.getSrc('token')) {
@@ -85,19 +93,20 @@ export default {
       }
 
       try {
-        const blogId = this.blog.id
+        const blogId = this.article.id
         const res = await this.$http.post('/comments/create', {
           ...params,
           blogId
         })
-        const comment = res.data
 
+        const comment = res.data
         const parentId = params.parentId
+
         if (parentId === undefined) {
           // 一级评论
-          this.blog.comments.push(comment)
+          this.article.comments.push(comment)
         } else {
-          this.blog.comments.forEach((c) => {
+          this.article.comments.forEach((c) => {
             if (c.id === parentId) {
               if (!c.childrenComments) {
                 c.childrenComments = []
@@ -107,10 +116,11 @@ export default {
             }
           })
         }
+
         callback()
-        this.$message({
-          message: (params.parentId ? '回复' : '评论') + '成功！'
-        })
+
+        const message = (params.parentId ? '回复' : '评论') + '成功！'
+        this.$message({ message })
       } catch (err) {
         console.log(err)
       }
@@ -125,14 +135,6 @@ export default {
       } catch (err) {
         console.log(err)
       }
-    },
-    async getBlog(id) {
-      try {
-        const res = await this.$http(`/blogs/${id}`)
-        this.blog = res.data
-      } catch (err) {
-        console.log(err)
-      }
     }
   }
 }
@@ -140,8 +142,9 @@ export default {
 
 <style scoped>
 .directory {
+  width: 15rem;
   list-style: none;
-  padding: .5rem;
+  padding: 0.5rem;
   padding-left: 1.5rem;
   border-left: 5px solid var(--blue-dark);
   font-size: 1.05rem;

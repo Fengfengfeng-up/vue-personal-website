@@ -28,16 +28,32 @@ const routes = [
         meta: { title: 'Freeisms', slideBar: true }
       },
       {
+        path: '/leetcode',
+        name: 'LeetCode',
+        props: true,
+        component: () => import(/* webpackChunkName: "group-article" */ '@v/article'),
+        meta: { title: 'LeetCode', slideBar: true }
+      },
+      {
+        path: '/leetcode/:id',
+        name: 'LeetCodeDetail',
+        props: true,
+        component: () => import(/* webpackChunkName: "group-article" */ '@c/ArticleTemplate'),
+        meta: {},
+        beforeEnter: checkParam
+      },
+      {
         path: '/blog',
         name: 'Blog',
-        component: () => import(/* webpackChunkName: "group-blog" */ '@v/blog'),
+        props: true,
+        component: () => import(/* webpackChunkName: "group-article" */ '@v/article'),
         meta: { title: 'Blog', slideBar: true }
       },
       {
         path: '/blog/:id',
         name: 'BlogDetail',
         props: true,
-        component: () => import(/* webpackChunkName: "group-blog" */ '@v/blog/detail'),
+        component: () => import(/* webpackChunkName: "group-article" */ '@c/ArticleTemplate'),
         meta: {},
         beforeEnter: checkParam
       },
@@ -64,11 +80,6 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const title = to.meta.title
   title && Vue.prototype.$setTitle(title)
-
-  // if ([].includes(to.name)) {
-  //   Vue.prototype.$message({ message: '努力筹备中...' })
-  //   next({ path: from.path })
-  // }
 
   next()
 })

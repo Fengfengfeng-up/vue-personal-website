@@ -7,12 +7,12 @@ blockquote {
   margin-left: 0;
 }
 
-.blog code:not([class^='language']) {
+.article code:not([class^='language']) {
   font-weight: 700;
   font-family: inherit;
 }
 
-.blog {
+.article {
   p,li {
     line-height: 1.5em;
   }

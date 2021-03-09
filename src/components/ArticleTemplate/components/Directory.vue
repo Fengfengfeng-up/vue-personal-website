@@ -139,7 +139,7 @@ export default {
 
 <style scoped>
 .directory-item {
-  padding-bottom: .3rem;
+  padding-bottom: 0.3rem;
 }
 
 .is-active {

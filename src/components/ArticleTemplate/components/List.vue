@@ -1,11 +1,11 @@
 <template>
-  <ul class="blog-list">
-    <li v-for="(item, i) in data" :key="i" class="blog-list-item dark">
+  <ul class="article-list">
+    <li v-for="(item, i) in data" :key="i" class="article-list-item dark">
       <router-link
         tag="div"
         :to="{
-          name: 'BlogDetail',
-          params: { id: item.id, blog: item },
+          name: `${isBlog ? 'BlogDetail' : 'LeetCodeDetail'}`,
+          params: { id: item.id, article: item },
         }"
       >
         <div class="top">
@@ -17,11 +17,16 @@
             <svg-icon icon="date" width="16" height="16" />
             <span>{{ $formatTime(item.createAt) }}</span></span>
         </div>
-        <div class="middle">
+        <div v-if="isBlog" class="middle">
           <p>{{ item.intro }}</p>
         </div>
         <div class="bottom">
-          <span v-for="tag in item.tags" :key="tag.name + tag.id" class="tag">
+          <span
+            v-for="tag in filterTag(item.tags)"
+            :key="tag.name + tag.id"
+            class="tag"
+            :style="getTagColor(tag.name)"
+          >
             {{ tag.name }}
           </span>
         </div>
@@ -36,16 +41,42 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    type: {
+      type: String,
+      default: 'blog'
+    }
+  },
+  computed: {
+    isBlog({ type }) {
+      return type === 'blog'
+    }
+  },
+  methods: {
+    filterTag(tags) {
+      const skips = ['LeetCode']
+      return tags.filter((t) => !skips.includes(t.name))
+    },
+    getTagColor(name) {
+      const color =
+        name === '简单'
+          ? '#009975'
+          : name === '中等'
+            ? '#ed7336'
+            : name === '困难'
+              ? '#ec4c47'
+              : '#888'
+      return `--color: ${color}`
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.blog-list {
+.article-list {
   list-style: none;
   padding: 0px;
-  .blog-list-item {
+  .article-list-item {
     display: block;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -104,21 +135,21 @@ export default {
     .bottom {
       .tag {
         font-size: var(--font-smaller);
-        padding-right: .3rem;
-        color: var(--gray);
+        margin-right: 0.3rem;
+        color: var(--color);
       }
     }
   }
 }
 
-body.dark-mode .blog-list .dark:nth-child(2n + 1) {
+body.dark-mode .article-list .dark:nth-child(2n + 1) {
   background: var(--gray-darker);
 }
-body.dark-mode .blog-list .dark:hover {
+body.dark-mode .article-list .dark:hover {
   background: var(--gray-darker);
 }
 
-body.dark-mode .blog-list .dark .date {
+body.dark-mode .article-list .dark .date {
   color: var(--gray);
 }
 </style>

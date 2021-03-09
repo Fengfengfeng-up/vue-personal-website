@@ -7,7 +7,7 @@
       <ul class="post-highlights-list">
         <li v-for="item in blogs" :key="item.id">
           <router-link
-            :to="{ name: 'BlogDetail', params: { id: item.id, blog: item } }"
+            :to="{ name: 'BlogDetail', params: { id: item.id, article: item } }"
           >{{ item.title }}</router-link>
         </li>
       </ul>

@@ -81,6 +81,10 @@ export default {
         {
           label: 'Cat',
           url: '/cat'
+        },
+        {
+          label: 'LeetCode',
+          url: '/leetcode'
         }
       ]
     }

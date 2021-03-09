@@ -76,7 +76,7 @@ export default {
             page: PAGE++,
             size: SIZE
           }
-        })
+        }, false)
 
         data.forEach((c) => (c._liked = false))
         this.cats.push(...data)

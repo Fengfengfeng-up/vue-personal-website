@@ -74,13 +74,13 @@
       </div>
     </div>
     <div class="lastest-content">
-      <h2>最新文章</h2>
-      <blog-list :data="content" />
+      <h2>Latest Content</h2>
+      <BlogList type="blog" :data="content" />
     </div>
   </div>
 </template>
 <script>
-import BlogList from '../blog/components/BlogList'
+import BlogList from '@c/ArticleTemplate/components/List'
 import Intro from './components/Intro'
 export default {
   name: 'Home',
