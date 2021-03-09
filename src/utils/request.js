@@ -1,12 +1,12 @@
 import axios from 'axios'
 import Vue from 'vue'
 
-const service = axios.create({
+const instance = axios.create({
   baseURL: process.env.VUE_APP_API,
-  timeout: 5000
+  timeout: 3000
 })
 
-service.interceptors.request.use(
+instance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -19,7 +19,7 @@ service.interceptors.request.use(
   }
 )
 
-service.interceptors.response.use(
+instance.interceptors.response.use(
   (response) => {
     const res = response.data
     return res
@@ -37,5 +37,25 @@ service.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+const service = (function() {
+  const cache = new Map()
+
+  return async function(...data) {
+    const key = data[0]
+    const needCache = data[data.length - 1]
+
+    if (!cache.has(key)) {
+      const res = await instance.apply(null, data)
+      if (needCache === false) return res
+
+      cache.size > 10 && cache.clear()
+      cache.set(key, res)
+      return res
+    }
+
+    return cache.get(key)
+  }
+})()
 
 export default service
