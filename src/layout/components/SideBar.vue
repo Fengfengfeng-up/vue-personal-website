@@ -1,6 +1,6 @@
 <template>
   <div class="layout-sidebar">
-    <div class="post-highlights">
+    <div v-show="!isLeetCode" class="post-highlights">
       <header>
         精选文章
       </header>
@@ -16,11 +16,14 @@
       <header>标签</header>
       <div class="tags-list">
         <router-link
-          v-for="item in tags"
+          v-for="item in currentTags"
           :key="item.name + item.id"
           class="tags-list-item"
           tag="div"
-          :to="{ path: '/blog', query: { tagId: item.id } }"
+          :to="{
+            path: `${isLeetCode ? '/leetcode' : '/blog'}`,
+            query: { tagId: item.id },
+          }"
         >
           {{ item.name }}
         </router-link>
@@ -61,7 +64,15 @@ export default {
     return {
       message: '',
       blogs: [],
-      tags: []
+      tags: {}
+    }
+  },
+  computed: {
+    isLeetCode({ $route }) {
+      return /leetcode/i.test($route.name)
+    },
+    currentTags({ isLeetCode, tags, $route }) {
+      return isLeetCode ? tags.leetcode : tags.ordinary || []
     }
   },
   created() {
@@ -100,8 +111,6 @@ export default {
       try {
         const res = await this.$http('/tags/list')
         this.tags = res.data
-          .filter((t) => t.name !== '小七' && t.name !== '十一')
-          .sort(() => Math.random() - 0.5)
       } catch (err) {
         console.log(err)
       }

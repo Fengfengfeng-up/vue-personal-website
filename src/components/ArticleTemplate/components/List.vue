@@ -17,7 +17,7 @@
             <svg-icon icon="date" width="16" height="16" />
             <span>{{ $formatTime(item.createAt) }}</span></span>
         </div>
-        <div v-if="isBlog" class="middle">
+        <div class="middle">
           <p>{{ item.intro }}</p>
         </div>
         <div class="bottom">
@@ -25,6 +25,7 @@
             v-for="tag in filterTag(item.tags)"
             :key="tag.name + tag.id"
             class="tag"
+            :class="{'leetcode': !isBlog}"
             :style="getTagColor(tag.name)"
           >
             {{ tag.name }}
@@ -65,7 +66,7 @@ export default {
             ? '#ed7336'
             : name === '困难'
               ? '#ec4c47'
-              : '#888'
+              : '#435367'
       return `--color: ${color}`
     }
   }
