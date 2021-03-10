@@ -107,10 +107,10 @@ export default {
     init({ matches }) {
       if (matches) {
         this.verbosity = 2
-        this.text = "👋 Hey, I'm Neal Feng"
+        this.text = "👋 Hey, I'm Feng Han"
       } else {
         this.verbosity = 1
-        this.text = '👋 Neal Feng'
+        this.text = '👋 Neal Feng Han'
       }
     },
     rangeInput(e) {

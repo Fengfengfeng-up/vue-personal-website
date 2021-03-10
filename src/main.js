@@ -13,6 +13,12 @@ if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
   require('fastclick').attach(document.body)
 }
 
+// 判断浏览器是否支持webp格式
+// if (/webpAvail=true/.test(document.cookie)) {
+//   document.documentElement.className += 'webp'
+//   window.webpAvail = true
+// }
+
 Vue.use(Message)
 Vue.use(Login)
 

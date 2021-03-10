@@ -2,7 +2,7 @@
   <div class="layout-footer">
     <div class="text">
       © <span>Fenghan</span> 2020-2021, powered by
-      <span>Vue</span>
+      <span>Vue & Nest</span>
     </div>
   </div>
 </template>

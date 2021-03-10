@@ -27,7 +27,9 @@ instance.interceptors.response.use(
   (error) => {
     const { message, statusCode } = error.response.data
     if (message) {
-      Vue.prototype.$message({ message })
+      Vue.prototype.$message({
+        message: Array.isArray(message) ? message[0] : message
+      })
     }
 
     if (statusCode === 401) {

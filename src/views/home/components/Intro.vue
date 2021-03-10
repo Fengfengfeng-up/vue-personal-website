@@ -43,6 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 .desc p {
+  font-size: 1.1rem;
   margin-bottom: 0px;
   .vue-icon {
     width: 1.1rem;

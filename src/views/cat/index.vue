@@ -106,14 +106,11 @@ export default {
 //   background-image: url($url+'.'+$type);
 //   background-repeat: no-repeat;
 //   background-size: cover;
-//   @at-root .webpa & {
+//   @at-root .webp & {
 //     background-image: url($url+'.webp');
 //   }
 // }
 .cat {
-  width: 100vw;
-  min-height: calc(100vh + 1px);
-  overflow-x: hidden;
   .top {
     width: 100%;
     overflow: hidden;

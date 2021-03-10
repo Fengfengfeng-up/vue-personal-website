@@ -35,7 +35,7 @@
       </header>
       <form>
         <p>
-          很高兴认识你，我们一起交流吧
+          很高兴认识你，我们一起交流吧！
         </p>
         <div>
           <label for="message">Message</label><input type="hidden" value="1" name="embed">
