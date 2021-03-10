@@ -22,8 +22,8 @@
           <div tag="div" class="cat-item">
             <img
               :src="item.file"
-              :title="`${item.title} | ${item.summary}`"
-              :alt="`${item.title} | ${item.summary}`"
+              :title="`${item.title}`"
+              :alt="`${item.title}`"
             >
             <div class="img-info">
               <span>{{ item.time }}</span>
@@ -34,14 +34,9 @@
                 ><svg-icon
                   icon="download"
                 /></a>
-                <div class="like">
-                  <a
-                    :class="{ liked: item._liked }"
-                    @click="likeCat(item)"
-                  ><svg-icon
-                    icon="heart"
-                  /></a>
-                  <span class="likes">{{ item.likes }}</span>
+                <div :class="{ liked: item._liked }" class="like">
+                  <a @click="likeCat(item)"><svg-icon icon="heart" /></a>
+                  <span v-show="item.likes > 0">{{ item.likes }}</span>
                 </div>
               </div>
             </div>
@@ -71,12 +66,16 @@ export default {
       if (this.isEmpty) return
 
       try {
-        const { data, total } = await this.$http('cats/list', {
-          params: {
-            page: PAGE++,
-            size: SIZE
-          }
-        }, false)
+        const { data, total } = await this.$http(
+          'cats/list',
+          {
+            params: {
+              page: PAGE++,
+              size: SIZE
+            }
+          },
+          false
+        )
 
         data.forEach((c) => (c._liked = false))
         this.cats.push(...data)
@@ -91,7 +90,7 @@ export default {
     async likeCat(cat) {
       if (cat._liked) return
       try {
-        await this.$http.patch(`/cats/${cat.id}`)
+        await this.$http(`/cats/${cat.id}`, { method: 'patch' }, false)
         cat._liked = !cat._liked
         cat.likes++
       } catch (err) {
@@ -135,7 +134,7 @@ export default {
       // @include webp('../../assets/image/cat', 'png');
       background-image: url('../../assets/image/bg.png');
       background-size: 10rem;
-      opacity: .2;
+      opacity: 0.2;
     }
     &:before {
       content: '';
@@ -184,38 +183,20 @@ export default {
       img {
         border-radius: 0.3rem;
       }
-      &::before {
-        content: '';
-        pointer-events: none;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 5px;
-        height: 3rem;
-        background: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.5) 0%,
-          transparent 100%
-        );
-        opacity: 0;
-        transition: opacity 0.2s;
-        border-bottom-left-radius: 2px;
-        border-bottom-right-radius: 2px;
-        z-index: 1;
-      }
       &:hover {
-        &::before {
-          opacity: 1;
-          transition-delay: 0.1s;
-        }
         .img-info {
           opacity: 1;
           transition-delay: 0.1s;
+          &::after {
+            opacity: 1;
+            transition-delay: 0.1s;
+          }
         }
       }
       .img-info {
         position: absolute;
-        bottom: 5px;
+        pointer-events: none;
+        bottom: 4.8px;
         left: 0;
         width: 100%;
         padding: 0.6rem 1.2rem;
@@ -224,7 +205,24 @@ export default {
         align-items: center;
         justify-content: space-between;
         opacity: 0;
-        z-index: 2;
+        border-bottom-left-radius: 0.3rem;
+        border-bottom-right-radius: 0.3rem;
+        overflow: hidden;
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 3rem;
+          background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.5) 0%,
+            transparent 100%
+          );
+          opacity: 0;
+          transition: opacity 0.2s;
+        }
         div {
           display: flex;
           align-items: center;
@@ -233,18 +231,16 @@ export default {
             a {
               margin-right: 0.2rem;
             }
+            &.liked {
+              color: var(--yellow);
+            }
           }
         }
-
         span,
         a {
           opacity: 0.8;
           background-image: none;
           &:hover {
-            opacity: 1;
-          }
-          &.liked {
-            color: red;
             opacity: 1;
           }
         }
