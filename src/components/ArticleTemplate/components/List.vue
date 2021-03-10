@@ -25,7 +25,7 @@
             v-for="tag in filterTag(item.tags)"
             :key="tag.name + tag.id"
             class="tag"
-            :class="{'leetcode': !isBlog}"
+            :class="{ leetcode: !isBlog }"
             :style="getTagColor(tag.name)"
           >
             {{ tag.name }}
@@ -66,7 +66,7 @@ export default {
             ? '#ed7336'
             : name === '困难'
               ? '#ec4c47'
-              : '#435367'
+              : '#ccc'
       return `--color: ${color}`
     }
   }
@@ -150,7 +150,9 @@ body.dark-mode .article-list .dark:hover {
   background: var(--gray-darker);
 }
 
-body.dark-mode .article-list .dark .date {
-  color: var(--gray);
+body.dark-mode .article-list {
+  .dark .date {
+    color: var(--gray-dark);
+  }
 }
 </style>
