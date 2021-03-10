@@ -95,9 +95,12 @@ export default {
 
       try {
         const blogId = this.article.id
-        const res = await this.$http.post('/comments/create', {
-          ...params,
-          blogId
+        const res = await this.$http('/comments/create', {
+          method: 'post',
+          data: {
+            ...params,
+            blogId
+          }
         })
 
         const comment = res.data

@@ -10,7 +10,7 @@
 
 ## 项目结构
 
-整个项目采用前后端分离的形式，前端技术栈主要是 Vue.js + Element UI，后端技术栈是 Nest.js + TypeORM。
+整个项目采用前后端分离的形式，前端技术栈主要是 Vue.js + Element UI，后端技术栈是 Nest.js + MySQL + TypeORM。
 
 本仓库存放的是博客网站的前端代码，[管理后台代码点我](https://github.com/Fengfengfeng-up/vue-website-backstage)，[后端代码点我](https://github.com/Fengfengfeng-up/nest-personal-website)。
 

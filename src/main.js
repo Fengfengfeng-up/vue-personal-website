@@ -9,7 +9,6 @@ import Login from './components/Login'
 import { formatTime } from './utils'
 
 if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  // 移动端消除300ms延迟
   require('fastclick').attach(document.body)
 }
 

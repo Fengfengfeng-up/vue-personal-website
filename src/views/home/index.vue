@@ -110,7 +110,7 @@ export default {
         this.text = "👋 Hey, I'm Feng Han"
       } else {
         this.verbosity = 1
-        this.text = '👋 Neal Feng Han'
+        this.text = '👋 Feng Han'
       }
     },
     rangeInput(e) {
