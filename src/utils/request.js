@@ -41,8 +41,15 @@ instance.interceptors.response.use(
 const service = (function() {
   const cache = new Map()
 
+  const extractParamStr = (param) => {
+    if (typeof param === 'object' && !Object.is(param, null)) {
+      const temp = Array.isArray(param) ? param : Object.values(param)
+      return temp.reduce((p, c) => p + extractParamStr(c), '')
+    } else return '' + param
+  }
+
   return async function(...data) {
-    const key = data[0]
+    const key = extractParamStr(data)
     const needCache = data[data.length - 1]
 
     if (!cache.has(key)) {
