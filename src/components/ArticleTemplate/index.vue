@@ -142,7 +142,7 @@ export default {
 
 <style scoped>
 .directory {
-  width: 15rem;
+  min-width: 15rem;
   list-style: none;
   padding: 0.5rem;
   padding-left: 1.5rem;

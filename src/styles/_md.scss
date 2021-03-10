@@ -10,11 +10,20 @@ blockquote {
 .article code:not([class^='language']) {
   font-weight: 700;
   font-family: inherit;
+  color: var(--blue-darker);
+  letter-spacing: 1px;
+}
+
+body.dark-mode {
+  .article code:not([class^='language']) {
+    color: var(--gray-dark);
+  }
 }
 
 .article {
-  p,li {
-    line-height: 1.5em;
+  p,
+  li {
+    line-height: 1.6em;
   }
 }
 
