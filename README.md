@@ -51,7 +51,7 @@
 
 ![home3](https://cdn.striveforus.com/home3.png)
 
-![blog3](https://cdn.striveforus.com/blog3.png)
+![blog4](https://cdn.striveforus.com/blog4.png)
 
 ![cat3](https://cdn.striveforus.com/cat3.jpg)
 
