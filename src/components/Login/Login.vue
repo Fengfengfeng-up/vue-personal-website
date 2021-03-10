@@ -18,7 +18,6 @@
             type="email"
             maxlength="25"
             placeholder="邮箱地址"
-            autocomplete="off"
             :value="form.email"
             @input="(e) => (form.email = e.target.value)"
           >
@@ -94,17 +93,23 @@ export default {
     },
     async signIn() {
       try {
-        const res = await this.$http.post('/visitor/login', this.form)
+        const res = await this.$http('/visitor/login', {
+          method: 'post',
+          data: { ...this.form }
+        })
         this.handleSuccess(res.data, () => {
           this.status = 'logined'
         })
       } catch {
-        this.remove()
+        this.reset(false)
       }
     },
     async signUp() {
       try {
-        const res = await this.$http.post('/visitor/register', this.form)
+        const res = await this.$http('/visitor/register', {
+          method: 'post',
+          data: { ...this.form }
+        })
 
         this.handleSuccess(res.data, () => {
           this.status = 'acount created'
@@ -115,7 +120,7 @@ export default {
           }, 1000)
         })
       } catch {
-        this.remove()
+        this.reset()
       }
     },
     handleSuccess(data, callback) {
@@ -357,10 +362,7 @@ body.dark-mode {
     header {
       background: var(--blue-darker);
       a {
-        background-image: linear-gradient(
-            var(--gray-light),
-            var(--gray-light)
-          ),
+        background-image: linear-gradient(var(--gray-light), var(--gray-light)),
           linear-gradient(var(--gray-light), var(--gray-light)),
           linear-gradient(var(--yellow), var(--yellow));
       }

@@ -35,8 +35,7 @@
       </header>
       <form>
         <p>
-          If you have any question, you can leave a message to me, I'd be happy
-          to check it out and reply.
+          很高兴认识你，我们一起交流吧
         </p>
         <div>
           <label for="message">Message</label><input type="hidden" value="1" name="embed">
@@ -90,7 +89,10 @@ export default {
       }
 
       try {
-        await this.$http.post('/comments/create', { content: msg })
+        await this.$http('/comments/create', {
+          method: 'post',
+          data: { content: msg }
+        })
         this.$message({ message: '留言成功' })
         this.message = ''
       } catch (err) {
