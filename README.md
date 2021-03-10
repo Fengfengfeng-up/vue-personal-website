@@ -14,6 +14,15 @@
 
 本仓库存放的是博客网站的前端代码，[管理后台代码点我](https://github.com/Fengfengfeng-up/vue-website-backstage)，[后端代码点我](https://github.com/Fengfengfeng-up/nest-personal-website)。
 
+## 功能
+
+* 文章列表及详情展示。
+* 标签分类。
+* 注册登录。
+* 评论及回复。
+* 多图展示。
+* 黑白主题切换。
+
 ## 预览
 
 ### Pc
@@ -22,13 +31,19 @@
 
 ![home2](https://cdn.striveforus.com/home2.png)
 
+![login](https://cdn.striveforus.com/login.png)
+
 ![blog](https://cdn.striveforus.com/blog.png)
 
 ![blog2](https://cdn.striveforus.com/blog2.png)
 
-![blog3](https://cdn.striveforus.com/blog3.png)
+![comment](https://cdn.striveforus.com/comment.png)
 
-![cat](https://cdn.striveforus.com/cat.png)
+![leetcode](https://cdn.striveforus.com/leetcode.png)
+
+![leetcode2](https://cdn.striveforus.com/leetcode2.png)
+
+![cat](https://cdn.striveforus.com/cat.jpg)
 
 ![cat2](https://cdn.striveforus.com/cat2.png)
 
@@ -36,9 +51,11 @@
 
 ![home3](https://cdn.striveforus.com/home3.png)
 
-![blog4](https://cdn.striveforus.com/blog4.png)
+![blog3](https://cdn.striveforus.com/blog3.png)
 
-![cat3](https://cdn.striveforus.com/cat3.png)
+![cat3](https://cdn.striveforus.com/cat3.jpg)
+
+![cat4](https://cdn.striveforus.com/cat4.png)
 
 ## 改进计划
 
