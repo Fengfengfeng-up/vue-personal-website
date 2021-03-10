@@ -113,6 +113,7 @@ export default {
 .cat {
   width: 100vw;
   min-height: calc(100vh + 1px);
+  overflow-x: hidden;
   .top {
     width: 100%;
     overflow: hidden;
@@ -185,17 +186,12 @@ export default {
       }
       &:hover {
         .img-info {
-          opacity: 1;
+          opacity: .8;
           transition-delay: 0.1s;
-          &::after {
-            opacity: 1;
-            transition-delay: 0.1s;
-          }
         }
       }
       .img-info {
         position: absolute;
-        pointer-events: none;
         bottom: 4.8px;
         left: 0;
         width: 100%;
@@ -207,27 +203,12 @@ export default {
         opacity: 0;
         border-bottom-left-radius: 0.3rem;
         border-bottom-right-radius: 0.3rem;
-        overflow: hidden;
-        &::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          height: 3rem;
-          background: linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.5) 0%,
-            transparent 100%
-          );
-          opacity: 0;
-          transition: opacity 0.2s;
-        }
         div {
           display: flex;
           align-items: center;
           justify-content: space-between;
           &.like {
+            min-width: 2rem;
             a {
               margin-right: 0.2rem;
             }
