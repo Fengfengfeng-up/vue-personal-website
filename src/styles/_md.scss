@@ -8,15 +8,18 @@ blockquote {
 }
 
 .article code:not([class^='language']) {
-  font-weight: 700;
-  font-family: inherit;
+  font-family: Operator Mono SSm A,Operator Mono SSm B,Source Code Pro,Menlo,Consolas,Monaco,monospace;;
   color: var(--blue-darker);
   letter-spacing: 1px;
+  padding: 0.1rem 0.3rem 0.2rem;
+  border-radius: 0.2rem;
+  background: #f3dfa9;
 }
 
 body.dark-mode {
   .article code:not([class^='language']) {
-    color: var(--gray-dark);
+    background: var(--yellow-dark);
+    color: var(--blue-darker);
   }
 }
 

@@ -7,7 +7,7 @@
       :class="index ? 'next' : 'prev'"
     >
       <template v-if="item">
-        <span class="prefix">{{ index ? 'next' : 'previous' }}：</span>
+        <span class="prefix">{{ index ? '下一篇' : '上一篇' }}：</span>
         <router-link
           :to="{
             name: $parent.isBlog ? 'BlogDetail' : 'LeetCodeDetail',
@@ -45,9 +45,7 @@ export default {
     padding: 0.5rem 0;
   }
   .prefix {
-    font-weight: 600;
-    font-size: var(--font-large);
-    color: var(--yellow-dark);
+    color: var(--blue-dark);
   }
 }
 </style>

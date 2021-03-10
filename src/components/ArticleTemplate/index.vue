@@ -25,6 +25,7 @@ import hljs from 'highlight.js'
 export default {
   name: 'ArticleTemplate',
   components: { Directory, Relation, Comment },
+  inheritAttrs: false,
   inject: ['app'],
   props: {
     id: {
